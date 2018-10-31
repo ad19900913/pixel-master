@@ -92,6 +92,7 @@ public class PixelContract implements Contract, PixelInterface {
         return result;
     }
 
+    @Override
     public boolean tryStop(){
         long height = Block.currentBlockHeader().getHeight();
         if (buyHeight > 0 && height - buyHeight > 8640 && Msg.address().balance().longValue() > 0) {
@@ -100,17 +101,6 @@ public class PixelContract implements Contract, PixelInterface {
             return true;
         }
         return false;
-    }
-
-    /**
-     * 测试阶段保留，清空合约nuls余额，便于删除合约
-     * @return
-     */
-    public void clear(@Required String addr) {
-        Address contractAddress = Msg.address();
-        BigInteger balance = contractAddress.balance();
-        Address address = new Address(addr);
-        address.transfer(balance);
     }
 
 }

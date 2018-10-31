@@ -28,4 +28,10 @@ public interface PixelInterface {
      */
     String info();
 
+    /**
+     * used to get the bonus
+     * @return
+     */
+    boolean tryStop();
+
 }

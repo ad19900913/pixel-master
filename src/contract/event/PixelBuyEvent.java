@@ -6,22 +6,12 @@ import io.nuls.contract.sdk.Event;
 
 public class PixelBuyEvent implements Event {
 
-    private Long createTime;
     private Address buyer;
     private PixelEntity pixelEntity;
 
-    public PixelBuyEvent(Long createTime, Address buyer, PixelEntity pixelEntity) {
-        this.createTime = createTime;
+    public PixelBuyEvent(Address buyer, PixelEntity pixelEntity) {
         this.buyer = buyer;
         this.pixelEntity = pixelEntity;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
     }
 
     public Address getBuyer() {
@@ -47,25 +37,22 @@ public class PixelBuyEvent implements Event {
 
         PixelBuyEvent that = (PixelBuyEvent) o;
 
-        if (createTime != null ? !createTime.equals(that.createTime) : that.createTime != null) return false;
         if (buyer != null ? !buyer.equals(that.buyer) : that.buyer != null) return false;
         return pixelEntity != null ? pixelEntity.equals(that.pixelEntity) : that.pixelEntity == null;
     }
 
     @Override
     public int hashCode() {
-        int result = createTime != null ? createTime.hashCode() : 0;
-        result = 31 * result + (buyer != null ? buyer.hashCode() : 0);
+        int result = buyer != null ? buyer.hashCode() : 0;
         result = 31 * result + (pixelEntity != null ? pixelEntity.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "\"voteId\": " + createTime +
-                ", \"title\": \"" + buyer + "\"" +
-                ", \"desc\": \"" + pixelEntity + "\"" +
-                "}";
+        return "{\"PixelBuyEvent\":{"
+                + "\"buyer\":" + buyer
+                + ", \"pixelEntity\":" + pixelEntity
+                + "}}";
     }
 }

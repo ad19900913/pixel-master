@@ -12,7 +12,7 @@ public class PixelEntity {
     private Address currentOwner = null;
     private Nuls price = INIT_PRICE;
     private Short red = 199;
-    private Short yellow = 72;
+    private Short green = 72;
     private Short blue = 5;
 
     public Short getX() {
@@ -55,12 +55,12 @@ public class PixelEntity {
         this.red = red;
     }
 
-    public Short getYellow() {
-        return yellow;
+    public Short getGreen() {
+        return green;
     }
 
-    public void setYellow(Short yellow) {
-        this.yellow = yellow;
+    public void setGreen(Short green) {
+        this.green = green;
     }
 
     public Short getBlue() {
@@ -83,7 +83,7 @@ public class PixelEntity {
         if (currentOwner != null ? !currentOwner.equals(that.currentOwner) : that.currentOwner != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (red != null ? !red.equals(that.red) : that.red != null) return false;
-        if (yellow != null ? !yellow.equals(that.yellow) : that.yellow != null) return false;
+        if (green != null ? !green.equals(that.green) : that.green != null) return false;
         return blue != null ? blue.equals(that.blue) : that.blue == null;
     }
 
@@ -94,7 +94,7 @@ public class PixelEntity {
         result = 31 * result + (currentOwner != null ? currentOwner.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (red != null ? red.hashCode() : 0);
-        result = 31 * result + (yellow != null ? yellow.hashCode() : 0);
+        result = 31 * result + (green != null ? green.hashCode() : 0);
         result = 31 * result + (blue != null ? blue.hashCode() : 0);
         return result;
     }
@@ -107,7 +107,7 @@ public class PixelEntity {
                 ", currentOwner=" + currentOwner +
                 ", price=" + price +
                 ", red=" + red +
-                ", yellow=" + yellow +
+                ", green=" + green +
                 ", blue=" + blue +
                 '}';
     }

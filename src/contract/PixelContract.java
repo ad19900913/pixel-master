@@ -24,8 +24,6 @@ import static io.nuls.contract.sdk.Utils.*;
 public class PixelContract implements Contract, PixelInterface {
 
     protected PixelEntity [][] pixels;
-
-    private int count = 0;
     private byte status = START;
     private long buyHeight = 0;
     private static Address lastBuyer = null;
@@ -57,7 +55,7 @@ public class PixelContract implements Contract, PixelInterface {
         require((price.value()) <= buyValue.value(), "buyValue not enough");
 
         if (currentOwner != null) {
-            currentOwner.transfer(BigInteger.valueOf(price.multiply(80).divide(100).value()));//给像素原所有者转账90%
+            currentOwner.transfer(BigInteger.valueOf(price.multiply(80).divide(100).value()));//给像素原所有者转账80%
         }
 
         long remain = buyValue.minus(price).value();
@@ -65,13 +63,13 @@ public class PixelContract implements Contract, PixelInterface {
             buyer.transfer(BigInteger.valueOf(remain));//return extra nuls
         }
         pixelEntity.setCurrentOwner(buyer);//set new owner
-        pixelEntity.setPrice(price.multiply(110).divide(100));//new price float up 10%
+        pixelEntity.setPrice(price.multiply(115).divide(100));//new price float up 15%
         pixelEntity.setRed(red);
         pixelEntity.setBlue(blue);
-        pixelEntity.setYellow(yellow);
+        pixelEntity.setGreen(yellow);
         buyHeight = Block.currentBlockHeader().getHeight();
         lastBuyer = buyer;
-        emit(new PixelBuyEvent((long) pseudoRandom(count++), buyer, pixelEntity));
+        emit(new PixelBuyEvent(buyer, pixelEntity));
     }
 
     @View
@@ -95,8 +93,11 @@ public class PixelContract implements Contract, PixelInterface {
     @Override
     public boolean tryStop(){
         long height = Block.currentBlockHeader().getHeight();
-        if (buyHeight > 0 && height - buyHeight > 8640 && Msg.address().balance().longValue() > 0) {
-            lastBuyer.transfer(Msg.address().balance());
+        BigInteger balance = Msg.address().balance();
+        if (buyHeight > 0 && height - buyHeight > AVAILABLE_HEIGHT && balance.longValue() > 0) {
+            BigInteger reward = balance.multiply(new BigInteger("95")).divide(new BigInteger("100"));
+            lastBuyer.transfer(reward);
+            developer.transfer(balance.subtract(reward));
             status = STOP;
             return true;
         }

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sdk-contract-vm-1.1.4.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/sdk-contract-vm-1.1.4.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

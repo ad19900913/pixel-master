@@ -3,7 +3,7 @@
 This is a simple smart contract similar to the eos pixel master.
 There are four methods in the contract, namely
 
-    void buy(Short x, Short y, Short red, Short blue, Short yellow);
+    void buy(Short x, Short y, Short red, Short blue, Short green);
     
     PixelEntity queryPixel(Short x, Short y);
     
@@ -29,7 +29,7 @@ Some code logic
 这是一个简单的类似于eos pixel master的智能合约。
 合约一共有3个方法，分别是
 
-    void buy(Short x, Short y, Short red, Short blue, Short yellow);
+    void buy(Short x, Short y, Short red, Short blue, Short green);
     
     PixelEntity queryPixel(Short x, Short y);
     
